@@ -1,0 +1,66 @@
+---
+format: html
+css: styles.css
+---
+```{=html}
+<style>
+/* Container for top section */
+.top-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Left column */
+.left-col {
+  flex: 1 1 350px;
+  text-align: center;
+}
+
+/* Right column */
+.right-col {
+  flex: 2 1 400px;
+}
+
+/* Profile pic styling */
+.left-col img {
+  width: 350px;
+  margin-bottom: 1rem;
+}
+
+/* Name and subtitle */
+.left-col h1 {
+  margin: 0.2rem 0 0.1rem 0;
+}
+.left-col h2 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 1.2rem;
+  color: #ccc;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+.right-col ul {
+  padding-left: 1rem;
+}
+</style>
+
+<div class="top-section">
+
+  <div class="left-col">
+    <img src="images/professionalpic.jpg" alt="Profile Picture">
+    <h1>Mark Miner II</h1>
+    <h2>Industrial Engineering Student</h2>
+    <h2>University of Arkansas</h2>
+    <h2>Class of Spring 2026</h2>
+  </div>
+
+  <div class="right-col">
+    <h3>About Me</h3>
+      <p>I am an Industrial Engineering student at the University of Arkansas with hands-on experience in entrepreneurship, operations, and technical problem solving. I built and managed a high-volume swim lesson business serving over 200 weekly customers, where I handled scheduling, pricing, customer communication, and overall operations. My technical skills include Industrial Engineering modeling, linear optimization, and data analysis, along with proficiency in Excel, Java, Vaadin, AMPL/CPLEX, and API integration. I enjoy applying project-based problem solving to develop web applications, automate workflows, and implement AI-enhanced features. In addition, I bring strong communication and leadership skills, gained from managing staff and client relationships, and I am continuously growing my expertise in technical B2B sales and long-term client partnerships.</p>
+  </div>
+
+</div>
+```

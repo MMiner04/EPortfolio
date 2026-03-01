@@ -1,0 +1,192 @@
+---
+title: "FilmFinder"
+date: 2025-12-08
+categories: [Coding, Data Analysis]
+thumbnail: FilmFinderBanner.png
+format: html
+description: "Interactive movie-recommendation app featuring a custom scoring algorithm, Vaadin interface, and Gemini-driven input refinement."
+image: "FilmFinderBanner.png"
+#| theme: cosmo
+#| toc: true
+#| toc-depth: 3
+#| number-sections: true
+#| css: styles.css
+---
+
+```{=html}
+<style>
+/* --- GLOBAL SETTINGS --- */
+body {
+  background-color: #15151e; /* Deep dark grey (easier on eyes than pure black) */
+  color: #e0e0e0; /* Soft white text */
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif; /* Modern, clean font */
+  line-height: 1.6;
+}
+
+/* --- HERO HEADER --- */
+/* Added a gradient overlay so white text pops against any image */
+h1:first-of-type {
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('FilmFinder_CoverImage.png');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  border-radius: 8px;
+  color: #fff !important;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+  text-align: center;
+  border-bottom: 4px solid #FF1801; /* F1 Red Accent */
+  margin-bottom: 2rem;
+}
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3 {
+  color: #fff;
+  margin-top: 2rem !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+h2 { border-left: 5px solid #FF1801; padding-left: 15px; } /* F1 Red marker */
+
+p { margin-bottom: 1.2rem; }
+li { margin-bottom: 0.5rem; }
+
+/* --- LINKS --- */
+a { color: #FF1801; text-decoration: none; font-weight: bold; }
+a:hover { text-decoration: underline; }
+
+/* --- TABLES (Fixed Color Conflict) --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background-color: #1e1e24; /* Darker card background */
+  border-radius: 8px;
+  overflow: hidden; /* Rounds the corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+th {
+  background-color: #2b2b36;
+  color: #FF1801;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #444;
+}
+
+td {
+  background-color: #1e1e24;
+  color: #ddd;
+  border-bottom: 1px solid #333;
+}
+
+th, td { padding: 15px 20px; text-align: left; }
+
+/* --- IMAGES & DIVIDERS --- */
+img {
+  display: block;
+  margin: 2rem auto;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #444, transparent); /* Fading divider */
+  margin: 3rem 0;
+}
+</style>
+```
+
+## Project Summary & Skills Used
+
+### Project Overview
+
+FilmFinder is a Java web application developed using Spring Boot and a Vaadin user interface. The project addresses the problem of users being overwhelmed by movie choices, transforming movie selection into an efficient Decision Support System (DSS). Recommendations are generated using a flexible, score-based engine enhanced by Generative AI, ranking movies according to user preferences.
+
+| Attribute          | Details                                                |
+|:-------------------|:-------------------------------------------------------|
+| **My Name**        | Mark Miner                                             |
+| **Teammates**      | Grayson Hambuchen, Leo Dehner                          |
+| **Core Concept**   | Data Analysis, AI Integration                          |
+| **Data Used**      | Local movie dataset (movie_data_cleaned.csv), TMDB API |
+| **Advanced Tools** | Vaadin (UI), Tablesaw (Data), Google Gemini API (AI)   |
+
+### Key Skills Used and Developed
+
+-   **Custom Java Classes & Inheritance:** Defined classes like `Movie` to structure and manage movie attributes, supporting clean filtration logic.\
+-   **External Library Integration:** Implemented Vaadin for UI, Tablesaw for CSV handling, and Gemini API for AI-driven enhancements.\
+-   **List & File Management:** Loaded large datasets and processed them with `ArrayLists` to compute scores and sort recommendations.\
+-   **Team Collaboration & Git Workflows:** Managed repository stability with `.gitignore` and coordinated work division among teammates.
+
+------------------------------------------------------------------------
+
+## Project Development Process
+
+### Initial Filtration Logic
+
+The original design filtered movies by exact matches, which failed for misspellings or ambiguous queries.
+
+### Pivot to Scoring System
+
+Each movie earns a point per match with user inputs (genres, cast, keywords). Movies with scores \>0 are displayed, sorted by descending score, with a top-50 limit.
+
+### AI-Enhanced Improvements
+
+Spelling and ambiguous inputs were handled via the Gemini API, which produces clean, comma-delimited lists of actors or keywords for scoring.
+
+### Team Collaboration Challenges
+
+Maintaining cohesion required centralizing all separate logic into the main filtration pipeline. Coordination ensured code compatibility across teammates’ efforts.
+
+------------------------------------------------------------------------
+
+## Key Features & Code Highlights
+
+### 1. Advanced Scoring Engine
+
+``` java
+public int calculateScore(Movie movie, List<String> userPreferences) {
+    int score = 0;
+    for (String preference : userPreferences) {
+        if (movie.getGenres().contains(preference) || movie.getCast().contains(preference)) {
+            score++;
+        }
+    }
+    return score;
+}
+
+// Display top 50 results with score >0
+// movieResults.stream()
+//     .filter(m -> m.getScore() > 0)
+//     .sorted((m1, m2) -> Integer.compare(m2.getScore(), m1.getScore()))
+//     .limit(50)
+//     .collect(Collectors.toList());
+```
+
+### 2. Gemini API Autocorrect & Keyword Expansion
+
+``` java
+private final Client geminiClient = Client.builder()
+        .apiKey("AIzaSyA00DHzmivuUvTjNnYZV84KYYv53NeFeuE")
+        .build();
+
+String systemPrompt = String.format(
+    "Given the user's input for %s, output only the corrected or standardized term(s) " +
+    "separated by commas. Do not add any extra text or explanation. " +
+    "If the input is already correct or standard, output the input as is.", fieldName);
+```
+
+⸻
+
+## Individual Reflection
+
+The primary lesson I took away from the FilmFinder project was the crucial realization that successful collaboration demands organization and strong coordination. I quickly understood that parallel coding was not enough. I needed to assume a leadership role to synthesize individual efforts and guarantee our code would actually work together as a unified system. One of my teammates provided excellent testing logic, and the other focused diligently on the front end Vaadin implementation. I am genuinely grateful for their help and contribution to the project’s success, as their dedicated work provided the solid components I needed to integrate into the core architecture.
+
+My main technical hurdle involved managing the integration of the separate testing logic into our live filtration system. This required carefully migrating algorithms that were proven in a standalone environment directly into our core Java pipeline. This process was critical because our score based recommendation engine depended on flawless integration to accurately filter and rank movies. Successfully completing this integration and ensuring the stability of the final syste was a major moment of growth. It proved my ability to manage complex logistical issues and perform the necessary technical heavy lifting to drive a shared project to completion.
+
+Ultimately, this project significantly boosted my confidence across two key technical areas. I now feel absolutely assured in my ability to define and utilize custom objects, such as the Movie class, to structure complex data and manipulate attributes for effective score calculation. More importantly, the project required me to implement technologies we had never covered in class, including the Google Gemini API for natural language processing and the Vaadin framework. This experience gave me a powerful new asset: the belief that I can self teach and seamlessly integrate entirely new, untouched components, enabling me to tackle any project with a high degree of self reliance and ownership.

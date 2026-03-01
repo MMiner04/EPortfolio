@@ -1,0 +1,204 @@
+body, section, h1, h2, h3, p, li, table, th, td, a, button, input, textarea, select {
+    font-family: "Copperplate", "Copperplate Gothic Light", sans-serif !important;
+}
+/* ========================================================================= */
+/* --- 1. NAVBAR & NAVIGATION STYLING --- */
+/* ========================================================================= */
+
+/* NAVBAR CONTAINER: Styles the entire black bar and green underline */
+.navbar {
+  display: flex; /* Enables Flexbox for alignment */
+  justify-content: space-between; /* Puts space between left and right sections */
+  align-items: center; /* Vertically centers content within the navbar */
+  padding: 8px 1rem !important; /* Adds padding (controls vertical size) */
+  background-color: #FFFFFF !important; /* Sets the background to Black */
+  border-bottom: 3px solid #7FFF00 !important; /* Creates the thick Green Underline */
+}
+
+/* NAVBAR LINKS & BRAND: Styles the green text and vertical centering of links/title */
+.navbar-nav > li > a,
+.navbar-brand {
+  color: #7FFF00 !important; /* Sets text color to Monster Energy Green */
+  padding: 0 10px !important; /* Horizontal spacing only */
+  line-height: 30px !important; /* Fixes vertical centering by defining text height */
+  height: 30px !important; /* Fixes vertical centering by defining box height */
+  display: block !important; /* Allows height/line-height properties to be respected */
+  font-weight: bold; /* Makes the text bold */
+}
+
+/* ========================================================================= */
+/* --- 2. TITLE BANNER STYLING (The Black/Green Header Bar) --- */
+/* ========================================================================= */
+
+/* TITLE BANNER CONTAINER: Forces the high-level Quarto banner wrapper to Black */
+.quarto-title-banner {
+  background-color: #FFFFFF !important; /* Sets the background to Black */
+}
+
+/* PAGE TITLE CONTENT (Generic & Listing): Styles the title content area and sets the height */
+.q-page-title,
+.q-title-block {
+  background-color: #000000 !important; /* Black background */
+  color: #7FFF00 !important; /* Monster green text */
+  border-bottom: 3px solid #7FFF00 !important; /* Green underline */
+  padding: 0.75rem 2rem !important; /* REDUCED VERTICAL PADDING (Controls height) */
+  text-shadow: 0 0 5px #000000; /* Subtle text shadow */
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+
+/* ========================================================================= */
+/* --- 3. HOMEPAGE LAYOUT (Top Section / Columns) --- */
+/* ========================================================================= */
+
+/* TOP SECTION CONTAINER: Enables a flexible two-column layout */
+.top-section {
+  display: flex; /* Enables Flexbox for column layout */
+  flex-wrap: wrap; /* Allows columns to stack on small screens */
+  gap: 2rem; /* Space between the two columns */
+  margin-bottom: 3rem; /* Space below the top section */
+}
+
+/* LEFT COLUMN: Styles the column typically holding the image/profile */
+.left-col {
+  flex: 1 1 350px; /* Takes up space, minimum width of 350px */
+  text-align: center; /* Centers content horizontally */
+}
+
+/* Styles for the image inside the left column */
+.left-col img {
+  width: 350px;
+  margin-bottom: 1rem;
+}
+
+/* Styles for the H1 tag inside the left column (e.g., your name) */
+.left-col h1 {
+  margin: 0.2rem 0 0.1rem 0;
+}
+
+/* Styles for the H2 tag inside the left column (e.g., your subtitle) */
+.left-col h2 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 1.2rem;
+  color: #ccc;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+/* RIGHT COLUMN: Styles the column typically holding the summary/details */
+.right-col {
+  flex: 2 1 400px; /* Takes up more space, minimum width of 400px */
+}
+
+/* Styles for unordered lists inside the right column */
+.right-col ul {
+  padding-left: 1rem;
+}
+
+
+/* ========================================================================= */
+/* --- 4. LISTING & PROJECT PAGE STYLING --- */
+/* ========================================================================= */
+
+/* Styles for links within the listing items (e.g., project titles) */
+.q-listing .q-listing-item a {
+  color: #7FFF00; /* Green link color */
+  text-decoration: none;
+  display: block; /* Important: Allows margin-bottom to function */
+  margin-bottom: 1rem; /* ADJUST THIS VALUE: Increase for more space, decrease for less */
+  margin-top: 1rem;
+}
+
+/* Style for category tags/badges below the project title */
+.listing-category {
+  /* Set the text to Green */
+  color: #7FFF00 !important; 
+  /* Set a dark background for contrast, if the default isn't black */
+  background-color: #000000 !important; 
+  /* Add a subtle green border around the tag */
+  border: 1px solid #7FFF00 !important; 
+  /* Optional: Make the text bolder */
+  font-weight: bold !important;
+}
+
+/* Styles for links within the listing items (e.g., project titles) */
+.q-listing .q-listing-item a {
+  color: #7FFF00; /* Green link color */
+  text-decoration: none;
+}
+
+/* Styles for link hover effect */
+.q-listing .q-listing-item a:hover {
+  text-decoration: underline;
+}
+
+/* LISTING DATE: Styles the date metadata (e.g., "Dec 8, 2025") on the Projects page */
+.listing-date {
+  font-weight: bold !important; /* Makes the date text bold */
+  color: #7FFF00 !important; /* Sets the date text color to green */
+}
+
+
+/* ========================================================================= */
+/* --- 5. GENERAL & GLOBAL STYLING --- */
+/* ========================================================================= */
+
+/* PAGE BODY: Sets the base theme for the entire website */
+body {
+  background-color: #000; /* Sets the overall page background to Black */
+  color: #fff; /* Sets the default text color to White */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Ensures common page elements (headings, text, table elements) remain white */
+section, h1, h2, h3, p, li, table, th, td {
+  color: #fff;
+}
+
+/* Styles for tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border-color: #444;
+}
+
+th {
+  background: #111;
+  font-weight: 600;
+  padding: 12px 16px;
+}
+
+td {
+  background: #222;
+  padding: 12px 16px;
+}
+
+/* Styles for images */
+img {
+  display: block;
+  margin: 1.4rem auto;
+  max-width: 90%;
+  border-radius: 8px;
+}
+
+/* Styles for horizontal rule separator */
+hr {
+  margin: 2.4rem 0;
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+/* Styles for paragraphs and list items */
+p {
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.6rem;
+}
